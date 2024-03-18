@@ -12,11 +12,11 @@
     <div class="center">
         <h1> Se connecter </h1>
         <form method="post" action="traitement2.php">
-            <div class ="textfield"> <input type= "text" name="email" required="required">
+            <div class ="textfield"> <input type= "text" name="email" required="required" id="email">
                 <span></span>
             <label for="email">E-mail</label>
         </div>
-            <div class ="textfield"> <input type= "password" name="password" required="required">  
+            <div class ="textfield"> <input type= "password" name="password" id="password" required="required">  
                 <span></span>
                 <label for="password">mot de passe</label>
             </div>
