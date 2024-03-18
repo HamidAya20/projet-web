@@ -1,24 +1,42 @@
 <?php
-include_once("data_base.php");
+
 if (isset($_POST['valider'])){
     if(!empty($_POST['email']) and !empty($_POST['password'])) {
-        $email=htmlspecialchars($_POST['email']);
-        $password=htmlspecialchars($_POST['password']);
-        $req=$cnx->prepare(`select * from condiat where email=? and password=? `);
-        $req->execute(array($email,$password));
-        $cpt=$req->rowCount();
+        $email=($_POST['email']);
+        $password=($_POST['password']);
+        require_once 'data_base.php'; 
+        $checkEmail = "SELECT * FROM `condiat` where `email` ='$email' and `password`=`$password`";
+        $checkEmailExecute = $cnx->query($checkEmail);
+        $checkEmailResult = $checkEmailExecute->fetchAll();
+        if(!empty($checkEmailResult)){
+
+            header("location: connexion.php");
+           
+       }}
+
         if($cpt==1){
             $message="Votre compte a bien ete trouve";
             echo"$message";
-          
+            
+            header("Location:profil.php");          
         }
         else{
             $message="DEsole nous ne trouvons pas ce compte";
             echo"$message";
         }
     } else{
-        $message="Veuillez remplir tous les champs";
-        echo"$message";
+        IF(!empty($email) || !empty($password))
+        
+        $sql11 = "INSERT INTO `condiat` (`email`,`password`)";
+        $sth = $cnx->query($sql11);
+    
+        if($sth){
+            $sql1 = "SELECT id_condidat FROM `condiat` where `email` = '$email' and `password`=$password";
+            $sth1 = $cnx->query($sql1);
+            $result = $sth1->fetch();
+            session_start();
+           
     }
 
 }  
+?>
