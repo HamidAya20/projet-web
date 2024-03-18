@@ -1,9 +1,12 @@
 <?php
+session_start();
 include_once('data_base.php');
-$sql='select * from condiat';
-$sth=$cnx->query($sql);
-$result=$sth->fetchAll(PDO::FETCH_ASSOC);
-?>
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php"); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    exit();
+    
+// Récupérer l'email de l'utilisateur à partir de la session
+    $email = $_SESSION['email'];
 <!DOCTYPE html>
 <html lang="fr">
 <head>
